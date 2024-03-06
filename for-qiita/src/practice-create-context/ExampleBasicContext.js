@@ -1,19 +1,22 @@
+import { useState } from "react";
 import ExampleHeader from "./ExampleHeader";
 import OtherBody from "./OtherBody";
-import { ExampleContext } from "./generateContext";
+import { ExampleContext, ExampleUpdateContext } from "./generateContext";
 // 親コンポーネント
 const ExampleBasicContext = () => {
+    const [theme, setTheme] = useState('light');
+    const toggleTheme = () => {
+        setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    }
+
     return (
         <>
             {/* 受け渡したいコンテクストの設定。子コンポーネントをラップしている。 */}
-            <ExampleContext.Provider value="provider-txt">
-                {/* 子コンポーネント */}
-                <ExampleHeader />
-                {/* 別のコンテクストを設定 */}
-                <ExampleContext.Provider value="reloaded-txt">
+            <ExampleContext.Provider value={theme}>
+                <ExampleUpdateContext.Provider value={toggleTheme}>
                     {/* 子コンポーネント */}
                     <ExampleHeader />
-                </ExampleContext.Provider>
+                </ExampleUpdateContext.Provider>
             </ExampleContext.Provider>
             {/* Providerでラップされていない */}
             <OtherBody />

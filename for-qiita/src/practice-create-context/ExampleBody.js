@@ -1,14 +1,15 @@
-import { ExampleContext } from "./generateContext";
-import { useContext } from "react";
+import { ExampleUpdateContext } from "./generateContext";
+import React, { useContext } from "react";
 // 孫コンポーネント
 const ExampleBody = () => {
     // コンテクストの使用
-    const txt = useContext(ExampleContext);
+    const toggleTheme = useContext(ExampleUpdateContext);
+
     return (
         <>
             <h2>Example Body</h2>
-            {/* 受け取ったコンテクストを設定 */}
-            <p>{txt}</p>
+            {/* コンテクストを更新する処理を設定 */}
+            <button type="button" onClick={toggleTheme} >切り替え</button>
         </>
     );
 };
