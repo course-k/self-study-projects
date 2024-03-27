@@ -1,6 +1,9 @@
 {
     "type": "module",
     "dependencies": {
+        "dotenv": "^16.4.5",
+        "google-auth-library": "^9.7.0",
+        "google-spreadsheet": "^4.1.1",
         "json2csv": "^6.0.0-alpha.2",
         "playwright": "^1.42.1"
     }
