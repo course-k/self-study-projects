@@ -15,11 +15,25 @@ env.config();
     });
     const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, serviceAccountAuth);
     await doc.loadInfo();
-    const newSheet = doc.sheetsByTitle['newSheet'];
-    const rows = await newSheet.getRows();
-    console.log(rows[0].get('name'));
-    rows[0].set('name', 'Bob');
-    console.log(rows[0].get('name'));
-
-    await rows[0].save();
+    await doc.addSheet({ title: 'fruits', headerValues: ['name', 'price'] });
+    const sheet = doc.sheetsByTitle['fruits'];
+    const data = [
+        {
+            name: 'orange',
+            price: 120
+        },
+        {
+            name: 'banana',
+            price: 50
+        },
+        {
+            name: 'apple',
+            price: 100
+        },
+        {
+            name: '合計',
+            price: '=sum(B2:B4)'
+        }
+    ];
+    await sheet.addRows(data);
 })();
