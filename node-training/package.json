@@ -4,8 +4,11 @@
         "dotenv": "^16.4.5",
         "google-auth-library": "^9.7.0",
         "google-spreadsheet": "^4.1.1",
+        "http": "^0.0.1-security",
         "json2csv": "^6.0.0-alpha.2",
         "node-cron": "^3.0.3",
+        "nodemailer": "^6.9.13",
+        "nodemon": "^3.1.0",
         "playwright": "^1.42.1"
     }
 }
