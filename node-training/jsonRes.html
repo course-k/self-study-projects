@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action='http://localhost:8081/json' method="POST">
+        <input type="text" name="name" value="Taro" />
+        <input type="text" name="country" value="Japan" />
+        <input type="submit" />
+    </form>
+    <script>
+        const element = document.querySelector('form');
+        element.onsubmit = (e) => {
+            e.preventDefault();
+
+            const [nm, cn] = element;
+            fetch('http://localhost:8081/json', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ nm: nm.value, cn: cn.value })
+            }).then(async (res) => {
+                const data = await res.json();
+                console.log(data);
+
+            });
+
+        };
+    </script>
+</body>
+
+</html>

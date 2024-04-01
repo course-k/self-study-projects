@@ -22,3 +22,9 @@ app.post('/post', (req, res) => {
     console.log(req.body);
     res.send('post requset');
 })
+
+app.post('/cart', (req, res) => {
+    const [item1, item2] = req.body.product;
+
+    res.send(`${item1}、${item2}がカートに追加されました`);
+}); 

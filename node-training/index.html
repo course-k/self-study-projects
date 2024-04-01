@@ -8,15 +8,14 @@
 </head>
 
 <body>
-    <form action="http://localhost:8080/get">
-        <input type="text" id="getName" name="getName" />
-        <input type="text" id="getCountry" />
-        <button>GET</button>
-    </form>
-    <form method="post" action="http://localhost:8080/post">
-        <input type="text" id="postName" />
-        <input type="text" id="postCountry" />
-        <button>POST</button>
+    <form method="post" action="http://localhost:8080/cart">
+        <div>
+            <label>商品:<input type="text" name="product[]" /></label>
+        </div>
+        <div>
+            <label>商品:<input type="text" name="product[]" /></label>
+        </div>
+        <input type="submit" />
     </form>
 </body>
 
