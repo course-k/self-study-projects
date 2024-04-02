@@ -1,0 +1,19 @@
+###
+GET http://localhost:8080/product
+
+###
+GET http://localhost:8080/product/0
+
+
+###
+POST http://localhost:8080/product
+content-type: application/json
+
+{
+    "id":"004",
+    "price":"320"
+}
+
+###
+DELETE http://localhost:8080/product/1
+
