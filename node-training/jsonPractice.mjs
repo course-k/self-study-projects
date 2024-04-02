@@ -21,8 +21,18 @@ app.get('/', (req, res) => {
 });
 
 app.post('/json', (req, res) => {
+    rres.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Authorization, Accept"
+    );
+    if (req.method === "OPTIONS") {
+        return res.status(204).end();
+    }
+    console.log('hoge');
     const json = req.body;
     console.log(json);
+    res.json({ msg: 'success' });
 });
 
 app.listen(PORT, () => {

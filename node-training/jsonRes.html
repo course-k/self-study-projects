@@ -22,6 +22,7 @@
             fetch('http://localhost:8081/json', {
                 method: 'POST',
                 headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:8081',
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify({ nm: nm.value, cn: cn.value })
