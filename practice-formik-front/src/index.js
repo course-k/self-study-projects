@@ -1,52 +1,68 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 import "./index.css";
+
+/* 初期値の定義 */
+const initialValues = {
+  fullName: "",
+  email: "",
+};
+
+/* バリデーションの定義 */
+const validationSchema = Yup.object().shape({
+  fullName: Yup.string().required().max(15),
+  email: Yup.string().required().email(),
+});
+
+/* submit処理の定義 */
+const customSubmit = (values) => {
+  console.log(`fullName : ${values.fullName}`);
+  console.log(`email : ${values.email}`);
+};
 
 const SimpleForm = () => {
   /* fomikの定義 */
-  const { values, handleChange } = useFormik({
-    /* 初期値の定義 */
-    initialValues: {
-      fullName: "",
-      email: "",
-    },
-  });
-
-  /* submit時の挙動の定義（仮） */
-  const printFormik = (e) => {
-    e.preventDefault();
-    console.log(`fullName : ${values.fullName}`);
-    console.log(`email : ${values.email}`);
-  };
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      /* 初期値 */
+      initialValues: initialValues,
+      /* バリデーション */
+      validationSchema: validationSchema,
+      /* submit処理 */
+      onSubmit: customSubmit,
+    });
 
   return (
     <>
-      {/* onSubmitの追加 */}
-      <form className="form-container" onSubmit={printFormik}>
+      {/* onSubmitの修正 */}
+      <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="fullName">full name:</label>
-          {/* onChangeとvalueの追加 */}
           <input
             type="text"
             id="fullName"
             name="fullName"
             placeholder="your name"
+            onBlur={handleBlur}
             onChange={handleChange}
             value={values.fullName}
           />
+          {touched.fullName && errors.fullName && <p>{errors.fullName}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="email">email address:</label>
-          {/* onChangeとvalueの追加 */}
           <input
-            type="email"
+            type="text"
             id="email"
             name="email"
             placeholder="your email-address"
+            onBlur={handleBlur}
             onChange={handleChange}
             value={values.email}
           />
+          {touched.email && errors.email && <p>{errors.email}</p>}
         </div>
         <button type="submit" className="submit-button">
           submit
